@@ -1,0 +1,18 @@
+services:
+  app_container:
+    build: .
+    ports:
+      - "5000:5000"
+    links:
+     - mongo_container
+  mongo_container:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
