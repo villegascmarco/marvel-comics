@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
   mongo_container:
-    image: mongo5.0.10
+    image: mongo:5.0.10
     ports:
       - "27017:27017"
     environment:
