@@ -6,7 +6,7 @@ services:
     links:
      - mongo_container
   mongo_container:
-    image: mongo
+    image: mongo:5.0.10
     ports:
       - "27017:27017"
     environment:
