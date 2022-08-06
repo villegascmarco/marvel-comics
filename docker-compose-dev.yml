@@ -1,0 +1,22 @@
+services:
+  app_container:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    links:
+     - mongo_container
+    volumes:
+      - .:/app
+  mongo_container:
+    image: mongo5.0.10
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
