@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from bson.json_util import dumps
 
+
 class Database:
     def __init__(self):
         self.client = MongoClient('mongodb://root:root@mongo_container:27017')
