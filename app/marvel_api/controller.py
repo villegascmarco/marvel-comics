@@ -9,18 +9,13 @@ API_URL = 'https://gateway.marvel.com:443/v1/public/'
 
 
 def search(request):
-    if not request.json:
-        raise TypeError(f'Excpected JSON, but ${type(request)} was found.')
     data = request.json
 
     type = json.get(data, 'type')
 
-    if type == None:
+    if type == None or type not in ['character', 'comic']:
         # Return all character order by name
-        return 'Type was not found, listing all characters', __list_all_characters()
-    elif type.lower() not in ['character', 'comic']:
-        raise Exception(
-            f'"{type}" is not a valid option, please select either "character" or "comic"')
+        return 'A valid Type was not found, listing all characters', __list_all_characters()
 
     filter = json.get_or_error(data, 'filter')
     if type.lower() == 'character':
