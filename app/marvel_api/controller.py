@@ -1,4 +1,5 @@
 from decouple import config
+from utilities import json
 import time
 import hashlib
 import requests
@@ -11,7 +12,7 @@ def search(request):
         raise TypeError(f'Excpected JSON, but ${type(request)} was found.')
     data = request.json
 
-    type = get(data, 'type')
+    type = json.get(data, 'type')
 
     if type == None:
         # Return all character order by name
@@ -20,6 +21,7 @@ def search(request):
         raise Exception(
             f'"{type}" is not a valid option, please select either "character" or "comic"')
 
+    filter = json.get_or_error(data, 'filter')
     return data
 
 
@@ -44,12 +46,7 @@ def __list_all_characters():
     return characters
 
 
-def get(json, atributo):
-    try:
-        return json[atributo]
 
-    except Exception:
-        return None
 
 
 def __get_public_key():
