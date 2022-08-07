@@ -5,7 +5,7 @@ users_route = Blueprint('users_route', __name__, url_prefix='/users')
 
 
 @users_route.route('/add', methods=['POST'])
-def index():
+def add():
     output = {}
     try:
         output['action'], output['result'] = controller.add(request)
