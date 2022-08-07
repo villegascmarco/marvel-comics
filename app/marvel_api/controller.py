@@ -33,7 +33,7 @@ def search_character(name):
     public_key, ts, hash = __get_api_auth()
 
     response = requests.get(
-        f'{API_URL}characters?nameStartsWith={name}&ts={ts}&apikey={public_key}&hash={hash}')
+        f'{API_URL}characters?nameStartsWith={urllib.parse.quote(name)}&ts={ts}&apikey={public_key}&hash={hash}')
     if response.status_code != 200:
         raise Exception(response.json())
 
