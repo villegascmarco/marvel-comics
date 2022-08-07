@@ -26,9 +26,7 @@ def search(request):
 
 
 def __list_all_characters():
-    public_key = __get_public_key()
-    ts = str(time.time())
-    hash = __get_hash(public_key, ts)
+    public_key, ts, hash = __get_api_auth()
 
     response = requests.get(
         f'{API_URL}characters?orderBy=name&ts={ts}&apikey={public_key}&hash={hash}')
@@ -46,7 +44,12 @@ def __list_all_characters():
     return characters
 
 
+def __get_api_auth():
+    public_key = __get_public_key()
+    ts = str(time.time())
+    hash = __get_hash(public_key, ts)
 
+    return public_key, ts, hash
 
 
 def __get_public_key():
