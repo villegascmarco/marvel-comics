@@ -1,5 +1,5 @@
 from decouple import config
-from utilities import json
+from ..utilities import json
 import time
 import hashlib
 import requests
