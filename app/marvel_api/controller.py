@@ -22,7 +22,28 @@ def search(request):
             f'"{type}" is not a valid option, please select either "character" or "comic"')
 
     filter = json.get_or_error(data, 'filter')
+    if type.lower() == 'character':
+        return search_character(filter)
+
     return data
+
+
+def search_character(name):
+    public_key, ts, hash = __get_api_auth()
+
+    response = requests.get(
+        f'{API_URL}characters?nameStartsWith={name}&ts={ts}&apikey={public_key}&hash={hash}')
+    if response.status_code != 200:
+        raise Exception(response.json())
+
+    results = response.json()['data']['results']
+
+    characters = [
+        {"id": character['id'],
+         "name": character['name'],
+         "image": character['thumbnail']['path']+'.jpg',
+         "appearances":character['comics']['available']} for character in results]
+    return characters
 
 
 def __list_all_characters():
