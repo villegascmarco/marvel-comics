@@ -15,6 +15,17 @@ def add():
     return jsonify(output)
 
 
+@users_route.route('/login', methods=['POST'])
+def login():
+    output = {}
+    try:
+        output['action'], output['result'] = controller.login(request)
+    except Exception as error:
+        output['error'] = True
+        output['message'] = str(error)
+    return jsonify(output)
+
+
 # from textwrap import indent
 # from connector import Connector
 # from flask import Blueprint, jsonify, request
