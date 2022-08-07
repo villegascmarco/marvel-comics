@@ -17,16 +17,16 @@ def search(request):
 
     if type == None:
         # Return all character order by name
-        return __list_all_characters()
+        return 'Type was not found, listing all characters', __list_all_characters()
     elif type.lower() not in ['character', 'comic']:
         raise Exception(
             f'"{type}" is not a valid option, please select either "character" or "comic"')
 
     filter = json.get_or_error(data, 'filter')
     if type.lower() == 'character':
-        return search_character(filter)
+        return 'Searching characters', search_character(filter)
 
-    return search_comic(filter)
+    return 'Searching comics', search_comic(filter)
 
 
 def search_character(name):

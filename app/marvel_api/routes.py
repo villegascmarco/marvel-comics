@@ -8,7 +8,7 @@ marvel_route = Blueprint('marvel_route', __name__, url_prefix='/searchComics')
 def index():
     output = {}
     try:
-        output['result'] = controller.search(request)
+        output['action'], output['result'] = controller.search(request)
     except Exception as error:
         output['error'] = True
         output['message'] = str(error)
