@@ -19,7 +19,7 @@ def get_layaways_user(current_user, request):
     output = db.read({"user_id": current_user})
 
     if not output:
-        return "", "No related record has found."
+        return "Listing related data.", "No related record has found."
 
     user = find_by_id(output['user_id'])
     user.pop('password', None)
@@ -32,4 +32,4 @@ def get_layaways_user(current_user, request):
                               reverse=(True if order_by == 'desc' else False))
     except Exception:
         raise Exception(f'Invalid field has found "{field_target}".')
-    return "action", dumps(output)
+    return "Listing related data.", dumps(output)
