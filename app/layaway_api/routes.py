@@ -16,4 +16,4 @@ def add(current_user):
     except Exception as error:
         output['error'] = True
         output['message'] = str(error)
-    return str(output)
+    return jsonify(output)
