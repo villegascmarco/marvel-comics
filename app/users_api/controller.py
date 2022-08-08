@@ -45,3 +45,10 @@ def login(request):
 
     return 'Logged on succesfully.', dumps(user_db)
 
+
+def find_by_id(id):
+    db = Database()
+
+    user_db = db.read({"_id": id})
+
+    return user_db
