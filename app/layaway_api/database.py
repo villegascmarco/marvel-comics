@@ -16,10 +16,7 @@ class Database:
         return self.collection.find_one(credentials)
 
     def write(self, new_document):
-        response = self.collection.insert_one(new_document)
-        new_document['id'] = str(response.inserted_id)
-        return dumps(new_document)
+        self.collection.insert_one(new_document)
 
     def update(self, reference, document):
-        output = self.collection.update_many(reference, document)
-        return self.read(reference)
+        self.collection.update_many(reference, document)
