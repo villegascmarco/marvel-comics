@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.users_api.database import Database
 from bson.json_util import dumps
 from app.utilities import json
+from decouple import config
 import datetime
 import jwt
 
@@ -38,7 +39,7 @@ def login(request):
     expires_at = str(datetime.datetime.utcnow() +
                      datetime.timedelta(minutes=60*24*10))
     token = jwt.encode(
-        {'id': str(user_db['_id']), "expires_at": expires_at}, 'kjasdfkjlsadkjfñlskajd')
+        {'id': str(user_db['_id']), "expires_at": expires_at}, config('SECRET_KEY'))
     user_db.pop('password', None)
     user_db.pop('_id', None)
     user_db['token'] = token

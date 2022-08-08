@@ -2,6 +2,7 @@ from functools import wraps
 from flask import request, jsonify, current_app
 from app.users_api.controller import find_by_id
 from bson.objectid import ObjectId
+from decouple import config
 import datetime
 import jwt
 
@@ -23,7 +24,7 @@ def validate_access():
 
             try:
                 jwt_data = jwt.decode(
-                    token, 'kjasdfkjlsadkjfñlskajd', algorithms=["HS256"])
+                    token, config('SECRET_KEY'), algorithms=["HS256"])
 
                 expires_at = datetime.datetime.strptime(
                     jwt_data["expires_at"], '%Y-%m-%d %H:%M:%S.%f')
