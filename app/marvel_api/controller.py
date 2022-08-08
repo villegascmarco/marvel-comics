@@ -60,6 +60,24 @@ def search_comic(name):
     return comics
 
 
+def search_comic_id(id):
+    public_key, ts, hash = __get_api_auth()
+
+    response = requests.get(
+        f'{API_URL}comics/{id}?ts={ts}&apikey={public_key}&hash={hash}')
+    if response.status_code != 200:
+        raise Exception(response.json())
+
+    results = response.json()['data']['results']
+
+    comics = [
+        {"id": comic['id'],
+         "tittle": comic['title'],
+         "image": comic['thumbnail']['path']+'.jpg',
+         "onsaleDate":comic['dates'][0]['date']} for comic in results]
+    return comics
+
+
 def __list_all_characters():
     public_key, ts, hash = __get_api_auth()
 
