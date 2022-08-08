@@ -7,7 +7,9 @@ def create_app():
     with app.app_context():
         from .marvel_api.routes import marvel_route
         from .users_api.routes import users_route
+        from app.layaway_api.routes import layaway_route
 
         app.register_blueprint(marvel_route)
         app.register_blueprint(users_route)
+        app.register_blueprint(layaway_route)
         return app
