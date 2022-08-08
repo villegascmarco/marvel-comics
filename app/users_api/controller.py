@@ -40,6 +40,8 @@ def login(request):
     token = jwt.encode(
         {'id': str(user_db['_id']), "expires_at": expires_at}, 'kjasdfkjlsadkjfñlskajd')
     user_db.pop('password', None)
+    user_db.pop('_id', None)
     user_db['token'] = token
 
-    return 'User created.', dumps(user_db)
+    return 'Logged on succesfully.', dumps(user_db)
+

@@ -17,4 +17,6 @@ class Database:
     def write(self, new_document):
         response = self.collection.insert_one(new_document)
         new_document['id'] = str(response.inserted_id)
+        new_document.pop('password', None)
+        new_document.pop('_id', None)
         return dumps(new_document)
