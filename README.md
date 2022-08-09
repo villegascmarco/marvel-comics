@@ -1,5 +1,7 @@
 # Marvel Comics
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/villegascmarco/marvel-comics_app_container.svg)](https://hub.docker.com/r/villegascmarco/marvel-comics_app_container)
+
 Microservices project using Flask to communicate with Marvel api and manage users using MongoDB.
 
 ## Set up
